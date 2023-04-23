@@ -6,7 +6,7 @@ module.exports = (schemaPath, interfaceName) => {
   var tsInterface = `\n`;
   tsInterface += `export interface ${interfaceName} {\n`;
   tsInterface += `  id: number;\n`;
-  tsInterface += `  attributes: {\n`;
+  //tsInterface += `  attributes: {\n`;
   var schemaFile;
   var schema;
   try {
@@ -38,7 +38,8 @@ module.exports = (schemaPath, interfaceName) => {
         });
       const isArray = attributeValue.relation.endsWith('ToMany');
       const bracketsIfArray = isArray ? '[]' : '';
-      tsProperty = `    ${attributeName}: { data: ${tsPropertyType}${bracketsIfArray} };\n`;
+//       tsProperty = `    ${attributeName}: { data: ${tsPropertyType}${bracketsIfArray} };\n`;
+      tsProperty = `    ${attributeName}: ${tsPropertyType}${bracketsIfArray};\n`;
     }
     // -------------------------------------------------
     // Component
@@ -160,7 +161,7 @@ module.exports = (schemaPath, interfaceName) => {
     tsInterface += `    locale: string;\n`;
     tsInterface += `    localizations?: { data: ${interfaceName}[] }\n`;
   }
-  tsInterface += `  }\n`;
+  //tsInterface += `  }\n`;
   tsInterface += '}\n';
   for (const tsImport of tsImports) {
     tsInterface =
